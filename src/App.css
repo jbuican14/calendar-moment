@@ -22,3 +22,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.selected {
+  background-color: #e97864;
+  color: #fff;
+  border: 1px dotted #fff;
+  transition: background-color 0.3s;
+}

@@ -1,38 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
 import './App.css';
+import buildCalendar from './calendar/build';
 
 function App() {
   const [calendar, setCalendar] = useState([]);
-  const [setMoment, getMoment] = useState(moment());
+  const [value, setValue] = useState(moment());
 
-  const startDay = setMoment.clone().startOf('month').startOf('isoWeek');
-  const endDay = setMoment.clone().endOf('month').endOf('isoweek');
-  const day = startDay.clone().subtract(1, 'day');
-  // console.log(day);
+  useEffect(() => {
+    setCalendar(buildCalendar(value));
+  }, [setValue]);
 
-  const temp = [];
-
-  while (day.isBefore(endDay, 'day')) {
-    // use moment method
-    //if day is still before the end day
-    console.log(endDay);
-    calendar.push(
-      Array(7)
-        .fill(0)
-        .map(() => day.add(1, 'day').clone())
-    );
+  console.log(value);
+  function isSelectedDay(day) {
+    return value.isSame(day, 'day');
   }
 
-  setCalendar(temp);
-  console.log(calendar);
+  function beforeToday(day) {
+    return day.isBefore(new Date(), 'day');
+  }
+
+  function isToday(day) {
+    return day.isSame(new Date(), 'day');
+  }
+
+  function dayStyles(day) {
+    if (beforeToday(day)) return 'before';
+    if (isSelectedDay(day)) return 'before';
+    if (isToday(day)) return 'selected';
+    return '';
+  }
+
   return (
     <div className="App">
-      {calendar.map((week, idx) => (
-        <div className="month" key={idx}>
-          {week.map((day) => (
-            <div className="day">{day.format('D').toString()}</div>
+      {calendar.map((week, id) => (
+        <div className="month" key={id}>
+          {week.map((item, idx) => (
+            <div
+              key={idx}
+              className="day"
+              onClick={() => setValue(item)}
+              className={value.isSame(item, 'day') ? 'day selected' : 'day'}
+            >
+              {item.format('D').toString()}
+            </div>
           ))}
         </div>
       ))}

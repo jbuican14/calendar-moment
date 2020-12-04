@@ -3,6 +3,7 @@ import moment from 'moment';
 
 import './App.css';
 import buildCalendar from './calendar/build';
+import dayStyles from './calendar/styles';
 
 function App() {
   const [calendar, setCalendar] = useState([]);
@@ -10,27 +11,9 @@ function App() {
 
   useEffect(() => {
     setCalendar(buildCalendar(value));
-  }, [setValue]);
+  }, [value]);
 
-  console.log(value);
-  function isSelectedDay(day) {
-    return value.isSame(day, 'day');
-  }
-
-  function beforeToday(day) {
-    return day.isBefore(new Date(), 'day');
-  }
-
-  function isToday(day) {
-    return day.isSame(new Date(), 'day');
-  }
-
-  function dayStyles(day) {
-    if (beforeToday(day)) return 'before';
-    if (isSelectedDay(day)) return 'selected';
-    if (isToday(day)) return 'today';
-    return '';
-  }
+  // console.log(value);
 
   return (
     <div className="App">
@@ -41,7 +24,7 @@ function App() {
               key={idx}
               className="day"
               onClick={() => setValue(item)}
-              className={dayStyles(item)}
+              className={dayStyles(item, value)}
             >
               {item.format('D').toString()}
             </div>

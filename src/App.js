@@ -20,14 +20,26 @@ function App() {
   function currentYear() {
     return value.format('YYYY');
   }
+  function prevMonth() {
+    return value.clone().subtract(1, 'month');
+  }
+  function nextMonth() {
+    return value.clone().add(1, 'month');
+  }
   return (
     <div className="App">
       <div className="header">
-        <div className="prev"> &lt;</div>
+        <div className="prev" onClick={() => setValue(prevMonth())}>
+          {' '}
+          &lt;
+        </div>
         <div className="current">
           {currentMonthName()} {currentYear()}
         </div>
-        <div className="next"> &gt;</div>
+        <div className="next" onClick={() => setValue(nextMonth())}>
+          {' '}
+          &gt;
+        </div>
       </div>
       <div className="body">
         {calendar.map((week, id) => (

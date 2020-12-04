@@ -15,12 +15,20 @@
   margin: 2em auto;
 }
 
-.day {
+.month > * {
   border: 1px solid #e97864;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.before {
+  background-color: #ccc;
+}
+
+.today {
+  color: green;
 }
 
 .selected {

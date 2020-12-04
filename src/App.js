@@ -27,8 +27,8 @@ function App() {
 
   function dayStyles(day) {
     if (beforeToday(day)) return 'before';
-    if (isSelectedDay(day)) return 'before';
-    if (isToday(day)) return 'selected';
+    if (isSelectedDay(day)) return 'selected';
+    if (isToday(day)) return 'today';
     return '';
   }
 
@@ -41,7 +41,7 @@ function App() {
               key={idx}
               className="day"
               onClick={() => setValue(item)}
-              className={value.isSame(item, 'day') ? 'day selected' : 'day'}
+              className={dayStyles(item)}
             >
               {item.format('D').toString()}
             </div>

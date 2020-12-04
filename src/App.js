@@ -25,10 +25,10 @@ function App() {
   console.log(calendar);
   return (
     <div className="App">
-      {calendar.map((week) => (
-        <div>
+      {calendar.map((week, idx) => (
+        <div className="month" key={idx}>
           {week.map((day) => (
-            <div>{day.format('D').toString()}</div>
+            <div className="day">{day.format('D').toString()}</div>
           ))}
         </div>
       ))}

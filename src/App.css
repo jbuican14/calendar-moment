@@ -13,6 +13,16 @@
   display: flex;
   justify-content: space-between;
 }
+.active,
+.next {
+  cursor: pointer;
+  font-size: 1.2em;
+}
+span.deactive {
+  pointer-events: none;
+  font-size: 1.2em;
+  color: lightgray;
+}
 
 .month {
   display: grid;
